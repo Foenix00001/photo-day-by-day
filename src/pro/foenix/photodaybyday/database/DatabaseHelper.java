@@ -13,7 +13,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String CREATE_TABLE_MONTH = "create table tblMonth (_id integer primary key autoincrement, name text);";
 	private static final String CREATE_TABLE_YEARMONTH = "create table tblYearMonth (_id integer primary key autoincrement, year integer, id_month integer, url text);";
 	private static final String CREATE_TABLE_MONTHDAY = "create table tblMonthDay (_id integer primary key autoincrement, id_yearmonth integer, day integer, url text);";
-	private static final String CREATE_TABLE_PICTURES = "create table tblPictures (_id integer primary key autoincrement, id_monthday integer, url text);";
+	private static final String CREATE_TABLE_PICTURES = "create table tblPictures (_id integer primary key autoincrement, id_monthday integer, url text, url_sound text, note text);";
 	
 	private static final String TAG = "DatabaseHelper";
 	private Context context = null;

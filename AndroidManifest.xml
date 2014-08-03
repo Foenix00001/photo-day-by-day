@@ -7,7 +7,9 @@
     <uses-sdk
         android:minSdkVersion="9"
         android:targetSdkVersion="17" />
-
+	<uses-permission android:name="android.permission.INTERNET" ></uses-permission>
+	    
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/stack_of_photos"
@@ -22,6 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:name=".database.DBContentProvider"
+            android:authorities="pro.foenix.photodaybyday.PhotoContentProvider"
+            android:exported="false"
+            android:writePermission="pro.foenix.photodaybyday.permission.WRITE_DBLOCAL" />
     </application>
 
 </manifest>

@@ -12,7 +12,7 @@
         android:gravity="center_vertical|center_horizontal" >
 
         <ImageButton
-            android:id="@+id/ibLeft"
+            android:id="@+id/ibPrev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_arrow_left" />
@@ -25,7 +25,7 @@
             android:textSize="20sp" />
 
         <ImageButton
-            android:id="@+id/ibRight"
+            android:id="@+id/ibNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_arrow_right" />
@@ -35,7 +35,6 @@
         android:id="@+id/gridview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:columnWidth="90dp"
         android:gravity="center"
         android:horizontalSpacing="10dp"
         android:numColumns="3"
