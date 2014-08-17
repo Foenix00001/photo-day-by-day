@@ -2,8 +2,8 @@
 <resources>
 
     <string name="app_name">PhotoDayByDay</string>
-    
-    <string-array name="Month_names">
+
+    <string-array name="month_names">
         <item>Январь</item>
         <item>Февраль</item>
         <item>Март</item>
@@ -17,6 +17,22 @@
         <item>Ноябрь</item>
         <item>Декабрь</item>
     </string-array>
-    
+    <string-array name="month_names_short">
+        <item>янв</item>
+        <item>фев</item>
+        <item>мар</item>
+        <item>апр</item>
+        <item>май</item>
+        <item>июн</item>
+        <item>июл</item>
+        <item>авг</item>
+        <item>сен</item>
+        <item>окт</item>
+        <item>ноя</item>
+        <item>дек</item>
+    </string-array>
+
+    <string name="photo_every_day">Photo</string>
+    <string name="month">Yanuary</string>
 
 </resources>

@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.text.TextUtils;
 
-public class DBContentProvider extends ContentProvider implements IYearMonth {
+public class DBContentProvider extends ContentProvider implements IPictures {
 	private static final String TAG = "DBContentProvider";
 	private DatabaseHelper mOpenHelper;
 	private static final UriMatcher sUriMatcher = buildUriMatcher();
@@ -18,8 +18,8 @@ public class DBContentProvider extends ContentProvider implements IYearMonth {
 
 	private static final String DBNAME = "Photo.db";
 
-	private static final int YEARMONTH = 10;
-	private static final int YEARMONTH_ID = 11;
+	private static final int PICTURES = 10;
+	private static final int PICTURES_ID = 11;
 	
 	private static final int RAW_QUERY = 100;
 
@@ -34,8 +34,8 @@ public class DBContentProvider extends ContentProvider implements IYearMonth {
 		final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
 		final String authority = AUTHORITY;
 
-		matcher.addURI(authority, "yearmonth", YEARMONTH);
-		matcher.addURI(authority, "yearmonth/#", YEARMONTH_ID);
+		matcher.addURI(authority, "pictures", PICTURES);
+		matcher.addURI(authority, "pictures/#", PICTURES_ID);
 		matcher.addURI(authority, "raw", RAW_QUERY);
 		return matcher;
 	}
@@ -47,17 +47,17 @@ public class DBContentProvider extends ContentProvider implements IYearMonth {
 		int id;
 		switch (sUriMatcher.match(uri)) {
 		// YEARMONTH
-		case YEARMONTH_ID:
+		case PICTURES_ID:
 			id = Integer.parseInt(uri.getLastPathSegment());
 			if (TextUtils.isEmpty(selection)) {
-				selection = IYearMonth.KEY_ROWID + " = " + id;
+				selection = IPictures.KEY_ROWID + " = " + id;
 			} else {
-				selection = selection + " AND " + IYearMonth.KEY_ROWID + " = " + id;
+				selection = selection + " AND " + IPictures.KEY_ROWID + " = " + id;
 			}
-			cursor = db.query(IYearMonth.DATABASE_TABLE, projection, selection, selectionArgs, null, null, sortOrder);
+			cursor = db.query(IPictures.DATABASE_TABLE, projection, selection, selectionArgs, null, null, sortOrder);
 			break;
-		case YEARMONTH:
-			cursor = db.query(IYearMonth.DATABASE_TABLE, projection, selection, selectionArgs, null, null, sortOrder);
+		case PICTURES:
+			cursor = db.query(IPictures.DATABASE_TABLE, projection, selection, selectionArgs, null, null, sortOrder);
 			break;
 
 		case RAW_QUERY:
@@ -78,8 +78,8 @@ public class DBContentProvider extends ContentProvider implements IYearMonth {
 		long rowId = 0;
 
 		switch (sUriMatcher.match(uri)) {
-		case YEARMONTH:
-			rowId = db.insert(IYearMonth.DATABASE_TABLE, null, values);
+		case PICTURES:
+			rowId = db.insert(IPictures.DATABASE_TABLE, null, values);
 			break;
 		default:
 			throw new IllegalArgumentException("Unknown URI " + uri);

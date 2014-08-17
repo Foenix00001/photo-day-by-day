@@ -1,14 +1,12 @@
 package pro.foenix.photodaybyday.entities;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
-public class YearMonthEntity {
+public class YearEntity {
 	private long mId;
 	private int mYear;
-	private int mIdMonth;
+	private int mMonth;
 	private String mUrl;
-	private String mMonth;
+	private String mMonthName;
 	private int mNumOfPhoto; 
 	private int mNumDaysInMonth;
 
@@ -16,20 +14,20 @@ public class YearMonthEntity {
 		return mNumDaysInMonth;
 	}
 
-	public YearMonthEntity() {
+	/*public YearMonthEntity() {
 
-	}
+	}*/
 
-	public YearMonthEntity(long id, int year, int idMonth, String url, String month, int num) {
+	public YearEntity(long id, int year, int month, String url, String monthName, int num) {
 		mId = id;
 		mYear = year;
-		mIdMonth = idMonth;
+		mMonthName = monthName;
 		mUrl = url;
 		mMonth = month;
 		mNumOfPhoto = num;
 
-		Calendar cal = new GregorianCalendar(mYear, mIdMonth-1, 1);
-		mNumDaysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH); 
+		//Calendar cal = new GregorianCalendar(mYear, mMonth-1, 1);
+		//mNumDaysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH); 
 	}
 
 	public long getId() {
@@ -49,7 +47,7 @@ public class YearMonthEntity {
 	}*/
 
 	public int getIdMonth() {
-		return mIdMonth;
+		return mMonth;
 	}
 
 /*	public void setIdMonth(int idMonth) {
@@ -66,8 +64,12 @@ public class YearMonthEntity {
 		mUrl = url;
 	}
 
-	public String getMonth() {
+	public int getMonth() {
 		return mMonth;
+	}
+	
+	public String getMonthName() {
+		return mMonthName;
 	}
 
 	public void setMonth(String url) {
@@ -84,7 +86,7 @@ public class YearMonthEntity {
 
 	@Override
 	public String toString() {
-		return " Год: " + mYear + ", месяц: " + mMonth + ", url = " + mUrl;
+		return " Год: " + mYear + ", месяц: " + mMonthName + ", url = " + mUrl;
 	}
 
 }

@@ -1,4 +1,4 @@
-package pro.foenix.photodaybyday.application;
+package pro.foenix.photodaybyday;
 
 import android.app.Application;
 import android.content.Context;

@@ -12,33 +12,34 @@
         android:gravity="center_vertical|center_horizontal" >
 
         <ImageButton
-            android:id="@+id/ibPrev"
+            android:id="@+id/ib_prev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_arrow_left" />
 
         <TextView
-            android:id="@+id/tvYear"
+            android:id="@+id/tv_caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Год"
             android:textSize="20sp" />
 
         <ImageButton
-            android:id="@+id/ibNext"
+            android:id="@+id/ib_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_arrow_right" />
     </LinearLayout>
 
     <GridView
-        android:id="@+id/gridview"
+        android:id="@+id/gv_year"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:horizontalSpacing="10dp"
+        android:horizontalSpacing="@dimen/photo_spacing"
+        android:verticalSpacing="@dimen/photo_spacing"
+        android:padding="@dimen/photo_spacing"
         android:numColumns="3"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="10dp" />
+        android:stretchMode="columnWidth" />
 
 </LinearLayout>
