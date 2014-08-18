@@ -34,5 +34,6 @@
 
     <string name="photo_every_day">Photo</string>
     <string name="month">Yanuary</string>
+    <string name="title_item_shot">Сделать снимок</string>
 
 </resources>

@@ -12,7 +12,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -116,7 +115,7 @@ public class YearActivity extends Activity implements IPictures {
 		for (int j = 1; j <= 12; j++) {
 			mArrayList.add(new YearEntity(0, mYear, j, null, getBaseContext().getResources().getStringArray(
 					R.array.month_names)[j - 1], 0));
-			Log.d(TAG, mArrayList.get(j - 1).toString());
+			//Log.d(TAG, mArrayList.get(j - 1).toString());
 		}
 
 		if (!(mCursor == null)) {

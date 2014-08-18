@@ -5,11 +5,13 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="9"
+        android:minSdkVersion="14"
         android:targetSdkVersion="17" />
 
-    <uses-permission android:name="android.permission.INTERNET" >
-    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:allowBackup="true"
@@ -31,6 +33,10 @@
         </activity>
         <activity
             android:name="pro.foenix.photodaybyday.ui.activities.DayActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="pro.foenix.photodaybyday.ui.activities.DayCameraActivity"
             android:label="@string/app_name" >
         </activity>
 

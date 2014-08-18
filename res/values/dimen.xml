@@ -3,4 +3,5 @@
     <dimen name="photo_spacing">10dp</dimen>
     <dimen name="screen_margin">15dp</dimen>
     <dimen name="imageview_padding">10dp</dimen>
+    <dimen name="camerabutton_margin">30dp</dimen>
 </resources>

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import pro.foenix.photodaybyday.R;
 import pro.foenix.photodaybyday.entities.YearEntity;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,7 +84,7 @@ public class YearAdapter extends BaseAdapter {
 
 			ImageLoader.getInstance().displayImage(mYearArray.get(position).getUrl(), viewHolder.imageView, options);
 
-			Log.d(TAG, mYearArray.get(position).getUrl());
+			//Log.d(TAG, mYearArray.get(position).getUrl());
 			viewHolder.tvMonth.setText(mYearArray.get(position).getMonthName());
 			//viewHolder.tvNumber.setText(mYearArray.get(position).getNumOfPhoto()+"/"+mYearArray.get(position).getNumDaysInMonth());
 		} else {
