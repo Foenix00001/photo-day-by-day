@@ -1,6 +1,10 @@
 package pro.foenix.photodaybyday.adapters;
 
+import java.io.File;
 import java.util.ArrayList;
+
+import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import pro.foenix.photodaybyday.R;
 import pro.foenix.photodaybyday.entities.YearEntity;
@@ -10,16 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 public class YearAdapter extends BaseAdapter {
 	private static final String TAG = "YearAdapter";
+	//private static final String PATH_FILE_PREFIX = "FILE://";
 	private Context mContext;
 	private ArrayList<YearEntity> mYearArray;
+
 
 	public YearAdapter(Context context, ArrayList<YearEntity> entity) {
 		mContext = context;
@@ -34,76 +37,63 @@ public class YearAdapter extends BaseAdapter {
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return null;
+		return mYearArray.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mYearArray.get(position).getId();
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View cellView;
 		ViewHolderItem viewHolder;
+
 		if (convertView == null) {
 			cellView = new View(mContext);
 			LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			cellView = inflater.inflate(R.layout.i_gridview_year, parent, false);
 			viewHolder = new ViewHolderItem();
-			viewHolder.imageView = (ImageView) cellView.findViewById(R.id.iv_picture);
+			viewHolder.ivPicture = (ImageView) cellView.findViewById(R.id.iv_picture);
 			viewHolder.tvMonth = (TextView) cellView.findViewById(R.id.tv_month);
-			//viewHolder.tvNumber = (TextView) cellView.findViewById(R.id.tv_number);
+			viewHolder.lEmptyText = (LinearLayout) cellView.findViewById(R.id.l_emptytext);
 			cellView.setTag(viewHolder);
-
 		} else {
 			cellView = (View) convertView;
 			viewHolder = (ViewHolderItem) convertView.getTag();
 		}
-		/*if (imageHeight==0){
-			viewHolder.imageView.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
-			imageWidth = viewHolder.imageView.getMeasuredWidth();
-			imageHeight = viewHolder.imageView.getMeasuredHeight();
-		}*/
-		/*	DisplayImageOptions options = new DisplayImageOptions.Builder()
-			.imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2).build(); */
-		DisplayImageOptions options = new DisplayImageOptions.Builder()
-				.showImageOnLoading(R.drawable.picture_empty_january).imageScaleType(ImageScaleType.IN_SAMPLE_INT)
-				.build();
+		viewHolder.ivPicture.setBackgroundColor(mContext.getResources().getIntArray(R.array.year_colors)[position]);
+		viewHolder.tvMonth.setBackgroundColor(mContext.getResources().getIntArray(R.array.year_colors_tran)[position]);
 		if (mYearArray.get(position).getUrl() != null) {
-			//viewHolder.imageView.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
-			//int widht = viewHolder.imageView.getWidth();
-			//int height = viewHolder.imageView.getHeight();
-			//File f = new File(mYearMonthArray.get(position).getUrl());
-			//Picasso.with(mContext).load(f).placeholder(R.raw.hourglass).error(R.raw.picture_empty)
-			//	.fit().centerCrop().noFade().into(viewHolder.imageView);
-			//.into(viewHolder.imageView);
-			//	.centerCrop().resize(widht, height).noFade().into(viewHolder.imageView);
+			//ImageLoader.getInstance().displayImage(PATH_FILE_PREFIX + mYearArray.get(position).getUrl(),
+			//	viewHolder.ivPicture);
+			File f = new File(mYearArray.get(position).getUrl());
+			Picasso.with(mContext).load(f).fit().centerCrop().noFade().into(viewHolder.ivPicture);
+/*			 Glide.with(mContext)
+		        .load(PATH_FILE_PREFIX +mYearArray.get(position).getUrl()) 
+		        .centerCrop()
+		        .crossFade()
+		        .into(viewHolder.ivPicture);*/
+
+			//.into(viewHolder.ivPicture);
+			//.centerCrop().resize(widht, height).noFade().into(viewHolder.ivPicture);
 			//.noFade().resize(150, 150).centerCrop().into(imageView);
 
-			ImageLoader.getInstance().displayImage(mYearArray.get(position).getUrl(), viewHolder.imageView, options);
-
-			//Log.d(TAG, mYearArray.get(position).getUrl());
 			viewHolder.tvMonth.setText(mYearArray.get(position).getMonthName());
-			//viewHolder.tvNumber.setText(mYearArray.get(position).getNumOfPhoto()+"/"+mYearArray.get(position).getNumDaysInMonth());
+			viewHolder.lEmptyText.setVisibility(View.GONE);
 		} else {
-			//Picasso.with(mContext).load(R.raw.picture_empty_january).placeholder(R.raw.hourglass).error(R.raw.picture_empty)
-			//	.fit().centerCrop().noFade().into(viewHolder.imageView);
-			ImageLoader.getInstance().displayImage("drawable://" + R.drawable.picture_empty_january,
-					viewHolder.imageView, options);
 			viewHolder.tvMonth.setText(mYearArray.get(position).getMonthName());
-
-			//viewHolder.tvNumber.setText("0/"+mYearArray.get(position).getNumDaysInMonth());
+			viewHolder.lEmptyText.setVisibility(View.VISIBLE);
+			viewHolder.ivPicture.setImageResource(0);
 		}
 		return cellView;
 	}
 
 	static class ViewHolderItem {
-		ImageView imageView;
+		ImageView ivPicture;
 		TextView tvMonth;
-		//TextView tvNumber;
-
+		LinearLayout lEmptyText;
 	}
 
 }

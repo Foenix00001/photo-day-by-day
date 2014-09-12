@@ -10,11 +10,15 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-feature android:name="android.hardware.camera" />
 
     <application
+        android:name=".AppPhotoDayByDay"
         android:allowBackup="true"
+        android:description="@string/app_desc"
         android:icon="@drawable/stack_of_photos"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
@@ -36,7 +40,7 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="pro.foenix.photodaybyday.ui.activities.DayCameraActivity"
+            android:name="pro.foenix.photodaybyday.ui.activities.DayPhotoActivity"
             android:label="@string/app_name" >
         </activity>
 

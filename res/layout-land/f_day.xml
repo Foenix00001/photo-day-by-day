@@ -1,0 +1,69 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tv_caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/screen_margin"
+        android:layout_marginTop="@dimen/screen_margin"
+        android:text="1 янв 2014" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageButton
+            android:id="@+id/ib_record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/screen_margin"
+            android:src="@drawable/abc_ic_voice_search_api_holo_light" />
+
+        <TextView
+            android:id="@+id/tv_note"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@id/ib_record"
+            android:layout_marginLeft="@dimen/screen_margin"
+            android:layout_toLeftOf="@id/ib_record"
+            android:text="Press to add a note"
+            android:textStyle="italic" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/screen_margin"
+        android:baselineAligned="false" >
+
+         <include
+            android:id="@+id/thumbnail1"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/imageview_padding"
+            layout="@layout/v_thumbnail" />
+
+         <include
+            android:id="@+id/thumbnail2"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_marginRight="@dimen/imageview_padding"
+            android:layout_height="wrap_content"
+            layout="@layout/v_thumbnail" />
+
+         <include
+            android:id="@+id/thumbnail3"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            layout="@layout/v_thumbnail" />
+    </LinearLayout>
+
+</LinearLayout>

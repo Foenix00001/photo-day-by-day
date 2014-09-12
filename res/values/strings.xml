@@ -2,38 +2,74 @@
 <resources>
 
     <string name="app_name">PhotoDayByDay</string>
+    <string name="app_desc">Just get 1 photo a day for sweet memories</string>
 
     <string-array name="month_names">
-        <item>Январь</item>
-        <item>Февраль</item>
-        <item>Март</item>
-        <item>Апрель</item>
-        <item>Май</item>
-        <item>Июнь</item>
-        <item>Июль</item>
-        <item>Август</item>
-        <item>Сентябрь</item>
-        <item>Октябрь</item>
-        <item>Ноябрь</item>
-        <item>Декабрь</item>
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
     </string-array>
     <string-array name="month_names_short">
-        <item>янв</item>
-        <item>фев</item>
-        <item>мар</item>
-        <item>апр</item>
-        <item>май</item>
-        <item>июн</item>
-        <item>июл</item>
-        <item>авг</item>
-        <item>сен</item>
-        <item>окт</item>
-        <item>ноя</item>
-        <item>дек</item>
+        <item>jan</item>
+        <item>feb</item>
+        <item>mar</item>
+        <item>apr</item>
+        <item>may</item>
+        <item>jun</item>
+        <item>jul</item>
+        <item>aug</item>
+        <item>sen</item>
+        <item>oct</item>
+        <item>nov</item>
+        <item>dec</item>
     </string-array>
 
-    <string name="photo_every_day">Photo</string>
+    <string name="photo_day_by_day">Photo day by day</string>
+    <string name="photo_">Photo</string>
+    <string name="_day_by_day">day by day</string>
     <string name="month">Yanuary</string>
     <string name="title_item_shot">Сделать снимок</string>
+    <string name="take_photo_image">Take photo image</string>
+    <string name="cant_take_pictures">It is impossible to take more then 3 photo a day, please delete some of them first</string>
+
+    <array name="year_colors">
+        <item>@color/jan</item>
+        <item>@color/feb</item>
+        <item>@color/mar</item>
+        <item>@color/apr</item>
+        <item>@color/may</item>
+        <item>@color/jun</item>
+        <item>@color/jul</item>
+        <item>@color/aug</item>
+        <item>@color/sep</item>
+        <item>@color/okt</item>
+        <item>@color/nov</item>
+        <item>@color/dec</item>
+    </array>
+    
+    <array name="year_colors_tran">
+        <item>@color/jan_tran</item>
+        <item>@color/feb_tran</item>
+        <item>@color/mar_tran</item>
+        <item>@color/apr_tran</item>
+        <item>@color/may_tran</item>
+        <item>@color/jun_tran</item>
+        <item>@color/jul_tran</item>
+        <item>@color/aug_tran</item>
+        <item>@color/sep_tran</item>
+        <item>@color/okt_tran</item>
+        <item>@color/nov_tran</item>
+        <item>@color/dec_tran</item>
+    </array>
+        <string name="delete">Delete</string>
 
 </resources>

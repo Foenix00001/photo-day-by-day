@@ -1,16 +1,13 @@
 package pro.foenix.photodaybyday.ui.fragments;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
+import pro.foenix.photodaybyday.AppPhotoDayByDay;
 import pro.foenix.photodaybyday.R;
 import pro.foenix.photodaybyday.adapters.MonthAdapter;
-import pro.foenix.photodaybyday.database.IPictures;
 import pro.foenix.photodaybyday.entities.MonthEntity;
 import pro.foenix.photodaybyday.ui.activities.DayActivity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -26,6 +23,8 @@ public class MonthFragment extends Fragment {
 	//public static final String EXTRA_ID = "pro.foenix.photodaybyday.monthdayintent.id";
 	public static final String EXTRA_YEAR = "pro.foenix.photodaybyday.monthintent.year";
 	public static final String EXTRA_MONTH = "pro.foenix.photodaybyday.monthintent.month";
+	private static final String KEY_YEAR = "year";
+	private static final String KEY_MONTH = "month";
 	private static final String TAG = "MonthFragment";
 	private ArrayList<MonthEntity> mMonthArray;
 	private GridView mMonthGridView;
@@ -34,18 +33,20 @@ public class MonthFragment extends Fragment {
 	private int mYear;
 	private int mMonth;
 	private ImageButton mNextButton, mPrevButton;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//
 		mYear = getArguments().getInt(EXTRA_YEAR);
 		mMonth = getArguments().getInt(EXTRA_MONTH);
+
 		//getActivity().setTitle(R.string.crimes_title);
 		//mMonthDayEntity = CrimeLab.get(getActivity()).getCrimes();
-		
-		
+
 	}
-	
-	public static MonthFragment newInstance( int year, int month){
+
+	public static MonthFragment newInstance(int year, int month) {
 		Bundle args = new Bundle();
 		//args.putLong(EXTRA_ID, id);
 		args.putInt(EXTRA_YEAR, year);
@@ -54,13 +55,24 @@ public class MonthFragment extends Fragment {
 		fragment.setArguments(args);
 		return fragment;
 	}
-	
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putInt(KEY_YEAR, mYear);
+		outState.putInt(KEY_MONTH, mMonth);
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.f_month, container, false);
+		if (savedInstanceState != null) {
+			mYear = savedInstanceState.getInt(KEY_YEAR, 0);
+			mMonth = savedInstanceState.getInt(KEY_MONTH, 0);
+		}
 		mMonthGridView = (GridView) v.findViewById(R.id.gv_month);
 		mCaptionTextView = (TextView) v.findViewById(R.id.tv_caption);
-		
+
 		mNextButton = (ImageButton) v.findViewById(R.id.ib_next);
 		mPrevButton = (ImageButton) v.findViewById(R.id.ib_prev);
 		mNextButton.setOnClickListener(new View.OnClickListener() {
@@ -77,47 +89,52 @@ public class MonthFragment extends Fragment {
 				updateMonth();
 			}
 		});
-		mMonthGridView.setOnItemClickListener(new OnItemClickListener() 
-		{
-		    public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
-		    {
-		        Intent intent = new Intent(getActivity().getBaseContext(), DayActivity.class);
-		        MonthEntity ent = mMonthArray.get(position);
-		        //intent.putExtra(MonthFragment.EXTRA_ID, ent.getId());
-		        intent.putExtra(DayFragment.EXTRA_YEAR, ent.getYear());
-		        intent.putExtra(DayFragment.EXTRA_MONTH, ent.getMonth());
-		        intent.putExtra(DayFragment.EXTRA_DAY, ent.getDay());
-		       // Log.d(TAG, "Год - "+ent.getYear()+ " Месяц - "+ent.getMonth()+ " День - "+ent.getDay());
-		        startActivity(intent);
-		    }
+		mMonthGridView.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+				Intent intent = new Intent(getActivity().getBaseContext(), DayActivity.class);
+				MonthEntity ent = mMonthArray.get(position);
+				//intent.putExtra(MonthFragment.EXTRA_ID, ent.getId());
+				intent.putExtra(DayFragment.EXTRA_YEAR, ent.getYear());
+				intent.putExtra(DayFragment.EXTRA_MONTH, ent.getMonth());
+				intent.putExtra(DayFragment.EXTRA_DAY, ent.getDay());
+				// Log.d(TAG, "Год - "+ent.getYear()+ " Месяц - "+ent.getMonth()+ " День - "+ent.getDay());
+				startActivity(intent);
+			}
 		});
-		updateMonth();
+		//updateMonth();
 		return v;
 	}
-	
+
+	@Override
+	public void onResume() {
+		updateMonth();
+		super.onResume();
+	}
+
 	private void updateMonth() {
 		mMonthArray = getMonthData(mYear, mMonth);
 		//запрос в бд по году плюс обновление картинок
 		//Log.d(TAG, "mYear = "+ mYear + ", mMonth = "+ mMonth);
 		//Log.d(TAG, "Месяц = "+ getActivity().getBaseContext().getResources().getStringArray(R.array.Month_names)[mMonth - 1]);
-		mCaptionTextView.setText(getActivity().getBaseContext().getResources().getStringArray(R.array.month_names)[mMonth - 1] 
-				+ "` "+String.valueOf(mYear).substring(2));
+		mCaptionTextView
+				.setText(getActivity().getBaseContext().getResources().getStringArray(R.array.month_names)[mMonth - 1]
+						+ "` " + String.valueOf(mYear).substring(2));
 		mMonthGridView.setAdapter(new MonthAdapter(this.getActivity(), mMonthArray));
-		if (mMonth==12){
+		if (mMonth == 12) {
 			mNextButton.setEnabled(false);
-		}else{
+		} else {
 			mNextButton.setEnabled(true);
 		}
-		if (mMonth==1){
+		if (mMonth == 1) {
 			mPrevButton.setEnabled(false);
-		}else{
+		} else {
 			mPrevButton.setEnabled(true);
 		}
-			
+
 	}
 
 	private ArrayList<MonthEntity> getMonthData(int year, int month) {
-		String[] projection = { IPictures.KEY_ROWID, IPictures.ROW_DAY, IPictures.ROW_URL };
+		/*String[] projection = { IPictures.KEY_ROWID, IPictures.ROW_DAY, IPictures.ROW_URL };
 		String[] selectionArgs = { Integer.toString(year), "1", Integer.toString(month)};
 		String selection = IPictures.ROW_YEAR + " = ? and "+ IPictures.ROW_FL_STAR + " = ? and "+IPictures.ROW_MONTH + " = ?";
 
@@ -148,7 +165,9 @@ public class MonthFragment extends Fragment {
 				}
 			}
 			mCursor.close();
-		}
+		}*/
+		ArrayList<MonthEntity> mArrayList = AppPhotoDayByDay.getBaseModel(this.getActivity()).getDaysInMonth(year,
+				month);
 		return mArrayList;
 
 	}

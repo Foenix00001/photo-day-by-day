@@ -7,6 +7,7 @@
         android:id="@+id/iv_picture"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background_february"
         android:scaleType="centerCrop" />
 
     <TextView
@@ -14,8 +15,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:background="@color/background_text_january"
+        android:background="@color/background_text_transparent"
+        android:gravity="center_horizontal|center_vertical"
+        android:minWidth="20dp"
         android:padding="2dp"
-        android:textColor="@color/white" />
+        android:text="1"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center_horizontal"
+        android:text="@string/photo_day_by_day"
+        android:textColor="@color/white"
+        android:textSize="10sp" />
 
 </FrameLayout>

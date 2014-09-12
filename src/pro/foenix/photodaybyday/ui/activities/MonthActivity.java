@@ -3,6 +3,8 @@ package pro.foenix.photodaybyday.ui.activities;
 import pro.foenix.photodaybyday.ui.fragments.MonthFragment;
 import android.support.v4.app.Fragment;
 
+
+
 public class MonthActivity extends OneFragmentActivity {
 	
 	@Override

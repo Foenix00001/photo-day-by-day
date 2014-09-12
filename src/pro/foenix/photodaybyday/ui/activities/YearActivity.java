@@ -3,6 +3,7 @@ package pro.foenix.photodaybyday.ui.activities;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import pro.foenix.photodaybyday.AppPhotoDayByDay;
 import pro.foenix.photodaybyday.R;
 import pro.foenix.photodaybyday.adapters.YearAdapter;
 import pro.foenix.photodaybyday.database.IPictures;
@@ -10,7 +11,6 @@ import pro.foenix.photodaybyday.entities.YearEntity;
 import pro.foenix.photodaybyday.ui.fragments.MonthFragment;
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,11 +18,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 public class YearActivity extends Activity implements IPictures {
 	private static final String TAG = "YearActivity";
@@ -37,6 +32,17 @@ public class YearActivity extends Activity implements IPictures {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.a_year);
+		/*Log.d(TAG, "DIRECTORY_PICTURES =  "+ 
+				Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString());
+		Log.d(TAG, "DIRECTORY_DCIM =  "+ 
+				Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString());
+		Log.d(TAG, "  DIRECTORY_MUSIC =  "+ 
+				Environment.getExternalStoragePublicDirectory(Environment.  DIRECTORY_MUSIC).toString());
+		File sdCard = Environment.getExternalStorageDirectory();
+		File dir = new File (sdCard.getAbsolutePath() + "/lalala/lalala2");
+		dir.mkdirs();
+		 */
+		//File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 		mYearGrigView = (GridView) findViewById(R.id.gv_year);
 		mYearTextView = (TextView) findViewById(R.id.tv_caption);
 		if (savedInstanceState != null) {
@@ -44,7 +50,7 @@ public class YearActivity extends Activity implements IPictures {
 		} else {
 			mYear = Calendar.getInstance().get(Calendar.YEAR);
 		}
-		updateYear();
+		//updateYear();
 
 		mNextButton = (ImageButton) findViewById(R.id.ib_next);
 		mPrevButton = (ImageButton) findViewById(R.id.ib_prev);
@@ -62,31 +68,26 @@ public class YearActivity extends Activity implements IPictures {
 				updateYear();
 			}
 		});
-		 
+
+		/*ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext()).build();
+		ImageLoader.getInstance().init(config);*/
 		
-		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-			
-			.build();
-		//DisplayImageOptions options = new DisplayImageOptions.Builder()
-			//.imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2).build();
-		DisplayImageOptions options = new DisplayImageOptions.Builder()
-			.cacheInMemory(true) 
-			.cacheOnDisk(true) 
-			//.showImageOnLoading(R.drawable.picture_empty_january)
-			.imageScaleType(ImageScaleType.IN_SAMPLE_INT).build(); 
-		ImageLoader.getInstance().init(config);
-		mYearGrigView.setOnItemClickListener(new OnItemClickListener() 
-		{
-		    public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
-		    {
-		        Intent intent = new Intent(getBaseContext(), MonthActivity.class);
-		        YearEntity ent = mYearArray.get(position);
-		        //intent.putExtra(MonthFragment.EXTRA_ID, ent.getId());
-		        intent.putExtra(MonthFragment.EXTRA_YEAR, ent.getYear());
-		        intent.putExtra(MonthFragment.EXTRA_MONTH, ent.getMonth());
-		        startActivity(intent);
-		    }
+		mYearGrigView.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+				Intent intent = new Intent(getBaseContext(), MonthActivity.class);
+				YearEntity ent = mYearArray.get(position);
+				//intent.putExtra(MonthFragment.EXTRA_ID, ent.getId());
+				intent.putExtra(MonthFragment.EXTRA_YEAR, ent.getYear());
+				intent.putExtra(MonthFragment.EXTRA_MONTH, ent.getMonth());
+				startActivity(intent);
+			}
 		});
+	}
+
+	@Override
+	protected void onResume() {
+		updateYear();
+		super.onResume();
 	}
 
 	@Override
@@ -104,9 +105,9 @@ public class YearActivity extends Activity implements IPictures {
 
 	private ArrayList<YearEntity> getYearData(int year) {
 		//String selection = IYearMonth.ROW_YEAR + " = ?";
-		String[] projection = { IPictures.KEY_ROWID, IPictures.ROW_MONTH, IPictures.ROW_URL };
+		/*String[] projection = { IPictures.KEY_ROWID, IPictures.ROW_MONTH, IPictures.ROW_URL };
 		String[] selectionArgs = { Integer.toString(year), "1" };
-		String selection = IPictures.ROW_YEAR + " = ? and "+ IPictures.ROW_FL_STAR + " = ?";
+		String selection = IPictures.ROW_YEAR + " = ? and " + IPictures.ROW_FL_STAR + " = ?";
 
 		Cursor mCursor = getBaseContext().getContentResolver().query(IPictures.CONTENT_URI, projection, selection,
 				selectionArgs, null);
@@ -128,14 +129,16 @@ public class YearActivity extends Activity implements IPictures {
 				//mCursor.getString(mCursor.getColumnIndex(IYearMonth.ROW_URL)));
 				//Log.d(TAG, mArrayList.get(i-1).toString());
 				for (YearEntity c : mArrayList) {
-					if (c.getIdMonth() == (month)){
+					if (c.getIdMonth() == (month)) {
 						c.setUrl(url);
-				//		c.setNumOfPhoto(num);
+						//		c.setNumOfPhoto(num);
 					}
 				}
 			}
 			mCursor.close();
-		}
+		}*/
+
+		ArrayList<YearEntity> mArrayList = AppPhotoDayByDay.getBaseModel(this).getMonthsInYear(year);
 		return mArrayList;
 	}
 

@@ -1,102 +1,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/pro.foenix.photodaybyday"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical" >
 
     <TextView
         android:id="@+id/tv_caption"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="@dimen/screen_margin"
         android:layout_marginTop="@dimen/screen_margin"
         android:text="1 янв 2014" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/screen_margin"
-        android:baselineAligned="false" >
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingBottom="@dimen/imageview_padding"
-            android:paddingRight="@dimen/imageview_padding"
-            android:paddingTop="@dimen/imageview_padding" >
-
-            <pro.foenix.photodaybyday.ui.views.SquareImageView
-                android:id="@+id/iv_1"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:adjustViewBounds="true"
-                android:cropToPadding="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/picture_empty_january" />
-
-            <CheckBox
-                android:id="@+id/cb_star1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="23dp"
-                android:button="@android:drawable/btn_star" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingBottom="@dimen/imageview_padding"
-            android:paddingRight="@dimen/imageview_padding"
-            android:paddingTop="@dimen/imageview_padding" >
-
-            <pro.foenix.photodaybyday.ui.views.SquareImageView
-                android:id="@+id/iv_2"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:adjustViewBounds="true"
-                android:cropToPadding="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/picture_empty_january" />
-
-            <CheckBox
-                android:id="@+id/cb_star2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="23dp"
-                android:button="@android:drawable/btn_star" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingBottom="@dimen/imageview_padding"
-            android:paddingRight="@dimen/imageview_padding"
-            android:paddingTop="@dimen/imageview_padding" >
-
-            <pro.foenix.photodaybyday.ui.views.SquareImageView
-                android:id="@+id/iv_3"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:adjustViewBounds="true"
-                android:cropToPadding="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/picture_empty_january" />
-
-            <CheckBox
-                android:id="@+id/cb_star3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="23dp"
-                android:button="@android:drawable/btn_star" />
-        </RelativeLayout>
-    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -104,7 +18,7 @@
 
         <TextView
             android:id="@+id/tv_note"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="@dimen/screen_margin"
@@ -121,13 +35,42 @@
             android:src="@drawable/abc_ic_voice_search_api_holo_light" />
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/iv_photo"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/screen_margin"
-        android:contentDescription="Picture on Day Screen"
-        android:scaleType="fitXY"
-        android:src="@drawable/picture_empty_january" />
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <include
+            android:id="@+id/thumbnail1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/imageview_padding"
+            android:layout_weight="1"
+            layout="@layout/v_thumbnail2x3" />
+
+        <include
+            android:id="@+id/thumbnail2"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/imageview_padding"
+            android:layout_weight="1"
+            layout="@layout/v_thumbnail2x3"
+            android:paddingBottom="@dimen/imageview_padding" />
+
+        <include
+            android:id="@+id/thumbnail3"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            layout="@layout/v_thumbnail2x3"
+            android:paddingBottom="@dimen/imageview_padding" />
+    </LinearLayout>
 
 </LinearLayout>

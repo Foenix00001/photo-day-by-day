@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name = "background_january">#6071D0</color>
-    <color name = "background_text_january">#434F91</color>
+    <color name = "background_january">#5F70CE</color>
+    <color name = "background_february">#6787FD</color>
+    <color name = "background_text_january">#C8434F91</color>
+    <color name = "background_text_february">#C84960B2</color>
+    <color name = "background_text_transparent">#962a36b1</color>
     <color name = "white">#F7F7F9</color>
     
+    
+    <color name = "jan">#6071D0</color>
+    <color name = "feb">#6889FF</color>
+    <color name = "mar">#00AABF</color>
+    <color name = "apr">#00AD9D</color>
+    <color name = "may">#4CBC4B</color>
+    <color name = "jun">#FFA726</color>
+    <color name = "jul">#FD6F42</color>
+    <color name = "aug">#EE4F4F</color>
+    <color name = "sep">#DD4B7C</color>
+    <color name = "okt">#BC3889</color>
+    <color name = "nov">#B24CAC</color>
+    <color name = "dec">#9471D2</color>
+    
+    
+    <color name = "jan_tran">#961a237e</color>
+    <color name = "feb_tran">#962a36b1</color>
+    <color name = "mar_tran">#96006064</color>
+    <color name = "apr_tran">#96004d40</color>
+    <color name = "may_tran">#960d5302</color>
+    <color name = "jun_tran">#96ff6f00</color>
+    <color name = "jul_tran">#96bf360c</color>
+    <color name = "aug_tran">#96bf360c</color>
+    <color name = "sep_tran">#96880e4f</color>
+    <color name = "okt_tran">#96880e4f</color>
+    <color name = "nov_tran">#964a148c</color>
+    <color name = "dec_tran">#96311b92</color>
 </resources>

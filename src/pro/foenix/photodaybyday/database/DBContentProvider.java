@@ -9,8 +9,9 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 
-public class DBContentProvider extends ContentProvider implements IPictures {
+public class DBContentProvider extends ContentProvider implements IPictures, IDays {
 	private static final String TAG = "DBContentProvider";
 	private DatabaseHelper mOpenHelper;
 	private static final UriMatcher sUriMatcher = buildUriMatcher();
@@ -20,9 +21,12 @@ public class DBContentProvider extends ContentProvider implements IPictures {
 
 	private static final int PICTURES = 10;
 	private static final int PICTURES_ID = 11;
-	
-	private static final int RAW_QUERY = 100;
+	private static final int PICTURES_DAYS = 12;
 
+	private static final int DAYS = 20;
+	private static final int DAYS_ID = 21;
+
+	private static final int RAW_QUERY = 100;
 
 	@Override
 	public boolean onCreate() {
@@ -36,6 +40,12 @@ public class DBContentProvider extends ContentProvider implements IPictures {
 
 		matcher.addURI(authority, "pictures", PICTURES);
 		matcher.addURI(authority, "pictures/#", PICTURES_ID);
+
+		matcher.addURI(authority, "pictures/days", PICTURES_DAYS);
+
+		matcher.addURI(authority, "days", DAYS);
+		matcher.addURI(authority, "days/#", DAYS_ID);
+
 		matcher.addURI(authority, "raw", RAW_QUERY);
 		return matcher;
 	}
@@ -46,7 +56,7 @@ public class DBContentProvider extends ContentProvider implements IPictures {
 		Cursor cursor = null;
 		int id;
 		switch (sUriMatcher.match(uri)) {
-		// YEARMONTH
+		// PICTURES
 		case PICTURES_ID:
 			id = Integer.parseInt(uri.getLastPathSegment());
 			if (TextUtils.isEmpty(selection)) {
@@ -54,10 +64,30 @@ public class DBContentProvider extends ContentProvider implements IPictures {
 			} else {
 				selection = selection + " AND " + IPictures.KEY_ROWID + " = " + id;
 			}
-			cursor = db.query(IPictures.DATABASE_TABLE, projection, selection, selectionArgs, null, null, sortOrder);
+			cursor = db.query(IPictures.TABLENAME, projection, selection, selectionArgs, null, null, sortOrder);
 			break;
 		case PICTURES:
-			cursor = db.query(IPictures.DATABASE_TABLE, projection, selection, selectionArgs, null, null, sortOrder);
+			cursor = db.query(IPictures.TABLENAME, projection, selection, selectionArgs, null, null, sortOrder);
+			break;
+		case PICTURES_DAYS:
+			//Log.d(TAG, IPictures.TABLENAME + " LEFT OUTER JOIN " + IDays.TABLENAME + " ON "
+				//	+ IPictures.ROW_ID_DAY_FULL + " = " + IDays.KEY_ROWID_FULL);
+			cursor = db.query(IPictures.TABLENAME + " LEFT OUTER JOIN " + IDays.TABLENAME + " ON "
+					+ IPictures.ROW_ID_DAY_FULL + " = " + IDays.KEY_ROWID_FULL, projection, selection, selectionArgs, null, null,
+					sortOrder);
+			break;
+		// DAYS
+		case DAYS_ID:
+			id = Integer.parseInt(uri.getLastPathSegment());
+			if (TextUtils.isEmpty(selection)) {
+				selection = IDays.KEY_ROWID + " = " + id;
+			} else {
+				selection = selection + " AND " + IDays.KEY_ROWID + " = " + id;
+			}
+			cursor = db.query(IDays.TABLENAME, projection, selection, selectionArgs, null, null, sortOrder);
+			break;
+		case DAYS:
+			cursor = db.query(IDays.TABLENAME, projection, selection, selectionArgs, null, null, sortOrder);
 			break;
 
 		case RAW_QUERY:
@@ -78,9 +108,16 @@ public class DBContentProvider extends ContentProvider implements IPictures {
 		long rowId = 0;
 
 		switch (sUriMatcher.match(uri)) {
+		//PICTURES
 		case PICTURES:
-			rowId = db.insert(IPictures.DATABASE_TABLE, null, values);
+			rowId = db.insert(IPictures.TABLENAME, null, values);
 			break;
+
+		//DAYS
+		case DAYS:
+			rowId = db.insert(IDays.TABLENAME, null, values);
+			break;
+
 		default:
 			throw new IllegalArgumentException("Unknown URI " + uri);
 		}

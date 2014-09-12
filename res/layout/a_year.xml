@@ -15,20 +15,27 @@
             android:id="@+id/ib_prev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:src="@drawable/ic_action_arrow_left" />
 
         <TextView
             android:id="@+id/tv_caption"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="30"
+            android:gravity="center"
             android:text="Год"
-            android:textSize="20sp" />
+            android:textSize="24sp" />
 
         <ImageButton
             android:id="@+id/ib_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1"
             android:src="@drawable/ic_action_arrow_right" />
+
     </LinearLayout>
 
     <GridView
