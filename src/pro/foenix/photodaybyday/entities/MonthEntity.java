@@ -18,7 +18,7 @@ public class MonthEntity {
 	} 
 
 	/*public int getNumOfPhoto() {
-		return mNumOfPhoto;
+		return mNumOfPhoto;----
 	}
 
 	public void setNumOfPhoto(int numOfPhoto) {

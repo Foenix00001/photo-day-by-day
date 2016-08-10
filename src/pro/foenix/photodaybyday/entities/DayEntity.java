@@ -17,7 +17,7 @@ public class DayEntity {
 
 	@Override
 	public String toString() {
-		return " Год: " + mYear + ", месяц: " + mMonth + ", день: " + mDay + ", url = " + mUrl;
+		return " Год:// " + mYear + ", месяц: " + mMonth + ", день: " + mDay + ", url = " + mUrl;
 	}
 
 	public String getUrl() {
