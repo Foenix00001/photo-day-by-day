@@ -21,7 +21,7 @@ public class DayActivity extends FragmentActivity {
 		int month = getIntent().getIntExtra(DayFragment.EXTRA_MONTH, 0);
 		int day = getIntent().getIntExtra(DayFragment.EXTRA_DAY, 0);
 		int day_id = getIntent().getIntExtra(DayFragment.EXTRA_DAY_ID, 0);
-		Log.d(TAG, "Год - " + year + " Месяц - " + month + " День - " + day);
+		Log.d(TAG, "Год - " + year + " Месяц -58470 " + month + " День - " + day);
 		setContentView(R.layout.a_day);
 		mPager = (ViewPager) findViewById(R.id.pager);
 
